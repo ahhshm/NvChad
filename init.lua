@@ -1,21 +1,28 @@
--- REMOVE THIS LATER 
-print("EMERGENCY: GUYS CHECK THE PINNED ISSUE ASAP!")
-
 local present, impatient = pcall(require, "impatient")
 
 if present then
-   impatient.enable_profile()
+  impatient.enable_profile()
 end
 
 local core_modules = {
-   "core.options",
-   "core.autocmds",
-   "core.mappings",
+  "core.options",
+  "core.autocmds",
+  "core.mappings",
+  "colors.highlights",
 }
 
 for _, module in ipairs(core_modules) do
-   local ok, err = pcall(require, module)
-   if not ok then
-      error("Error loading " .. module .. "\n\n" .. err)
-   end
+  local ok, err = pcall(require, module)
+  if not ok then
+    error("Error loading " .. module .. "\n\n" .. err)
+  end
 end
+
+_G.luasnip = {}
+_G.luasnip.vars = {
+  username = "ahhshm",
+  email = "ahhdev@gmail.com",
+  github = "https://github.com/ahhshm",
+  real_name = "Arman Hashemi",
+  date_format = "%m-%d-%Y",
+}

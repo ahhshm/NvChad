@@ -13,7 +13,7 @@ opt.shiftwidth = 2
 opt.smartindent = true
 
 -- disable tilde on end of buffer: https://github.com/neovim/neovim/pull/8546#issuecomment-643643758
-opt.fillchars = { eob = " "}
+opt.fillchars = { eob = " " }
 
 opt.hidden = true
 opt.ignorecase = true
@@ -22,17 +22,17 @@ opt.mouse = "a"
 
 -- Numbers
 opt.number = true
-opt.numberwidth = 2
-opt.relativenumber = false
+opt.numberwidth = 3
+opt.relativenumber = true
 opt.ruler = false
 
 -- disable nvim intro
-opt.shortmess:append "sI"
+opt.shortmess:append("sI")
 
 opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
-opt.tabstop = 8
+opt.tabstop = 2
 opt.termguicolors = true
 opt.timeoutlen = 400
 opt.undofile = true
@@ -42,37 +42,48 @@ opt.updatetime = 250
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-opt.whichwrap:append "<>[]hl"
+opt.whichwrap = ""
 g.mapleader = " "
+
+opt.wrap = false
+opt.scrolloff = 8
+opt.sidescrolloff = 8
 
 -- disable some builtin vim plugins
 
- local default_plugins = {
-      "2html_plugin",
-      "getscript",
-      "getscriptPlugin",
-      "gzip",
-      "logipat",
-      "netrw",
-      "netrwPlugin",
-      "netrwSettings",
-      "netrwFileHandlers",
-      "matchit",
-      "tar",
-      "tarPlugin",
-      "rrhelper",
-      "spellfile_plugin",
-      "vimball",
-      "vimballPlugin",
-      "zip",
-      "zipPlugin",
- }
+local default_plugins = {
+  "2html_plugin",
+  "getscript",
+  "getscriptPlugin",
+  "gzip",
+  "logipat",
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "matchit",
+  "tar",
+  "tarPlugin",
+  "rrhelper",
+  "spellfile_plugin",
+  "vimball",
+  "vimballPlugin",
+  "zip",
+  "zipPlugin",
+}
 
 for _, plugin in pairs(default_plugins) do
-   g["loaded_" .. plugin] = 1
+  g["loaded_" .. plugin] = 1
 end
 
 vim.schedule(function()
-   vim.opt.shadafile = "NONE"
-   vim.cmd [[ silent! rsh ]]
+  vim.opt.shadafile = "NONE"
+  vim.cmd([[ silent! rsh ]])
 end)
+
+vim.g.tokyonight_style = "night"
+vim.cmd("colorscheme tokyonight")
+
+-- use filetype.lua instead of filetype.vim
+g.did_load_filetypes = 0
+g.do_filetype_lua = 1
