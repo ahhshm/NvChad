@@ -50,7 +50,10 @@ map("n", "<C-l>", "<C-w>l")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-j>", "<C-w>j")
 
-map("n", "<leader>x", ":lua require('core.utils').close_buffer() <CR>") -- close buffer
+map("n", "<leader>x", function()
+  -- Force delete current buffer
+  require("bufdelete").bufdelete(0, false)
+end)
 map("n", "<C-c>", ":%y+ <CR>") -- copy whole file content
 map("n", "<S-t>", ":enew <CR>") -- new buffer
 map("n", "<C-t>b", ":tabnew <CR>") -- new tabs
@@ -78,9 +81,6 @@ end)
 
 -- get out of terminal mode
 map("t", "jk", "<C-\\><C-n>")
-
--- pick a hidden term
-map("n", "<leader>W", ":Telescope terms <CR>")
 
 -- spawns terminals
 map("n", "<A-h>", ":execute 15 .. 'new +terminal' | let b:term_type = 'hori' | startinsert <CR>")
@@ -129,6 +129,8 @@ M.telescope = function()
   map("n", "<leader>fo", ":Telescope oldfiles <CR>")
   map("n", "<leader>th", ":Telescope themes <CR>")
   map("n", "<leader>cc", ":Telescope<CR>")
+
+  map("n", "<leader>fd", ":Telescope file_browser<CR>")
 end
 
 M.gitsigns = function()

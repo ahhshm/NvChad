@@ -1,6 +1,13 @@
 local opt = vim.opt
 local g = vim.g
 
+vim.g.tokyonight_style = "night"
+vim.cmd("colorscheme tokyonight")
+
+-- use filetype.lua instead of filetype.vim
+g.did_load_filetypes = 0
+g.do_filetype_lua = 1
+
 opt.laststatus = 3 -- global statusline
 opt.title = true
 opt.clipboard = "unnamedplus"
@@ -80,10 +87,3 @@ vim.schedule(function()
   vim.opt.shadafile = "NONE"
   vim.cmd([[ silent! rsh ]])
 end)
-
-vim.g.tokyonight_style = "night"
-vim.cmd("colorscheme tokyonight")
-
--- use filetype.lua instead of filetype.vim
-g.did_load_filetypes = 0
-g.do_filetype_lua = 1

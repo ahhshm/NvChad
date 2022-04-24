@@ -1,104 +1,99 @@
 local c = require("colors").get()
 
--- functions for setting highlights
-local fg = require("core.utils").fg
-local fg_bg = require("core.utils").fg_bg
-local bg = require("core.utils").bg
+local hl = require("core.utils").hl
 
 -- Comments
--- fg("Comment", grey_fg .. " gui=italic") --italic!
-fg("Comment", c.grey_fg)
+hl("Comment", { fg = c.grey_fg })
 
 -- Line number
-fg("cursorlinenr", c.white)
+hl("cursorlinenr", { fg = c.white })
 
 -- same it bg, so it doesn't appear
-fg("EndOfBuffer", c.black)
+hl("EndOfBuffer", { fg = c.black })
 
 -- For floating windows
-fg("FloatBorder", c.blue)
-bg("NormalFloat", c.darker_black)
+hl("FloatBorder", { fg = c.blue })
+hl("NormalFloat", { bg = c.darker_black })
 
 -- Pmenu
-bg("Pmenu", c.one_bg)
-bg("PmenuSbar", c.one_bg2)
-bg("PmenuSel", c.pmenu_bg)
-bg("PmenuThumb", c.nord_blue)
-fg("CmpItemAbbr", c.white)
-fg("CmpItemAbbrMatch", c.white)
-fg("CmpItemKind", c.white)
-fg("CmpItemMenu", c.white)
+hl("Pmenu", { bg = c.one_bg })
+hl("PmenuSbar", { bg = c.one_bg2 })
+hl("PmenuSel", { bg = c.pmenu_bg })
+hl("PmenuThumb", { bg = c.nord_blue })
+hl("CmpItemAbbr", { fg = c.white })
+hl("CmpItemAbbrMatch", { fg = c.white })
+hl("CmpItemKind", { fg = c.white })
+hl("CmpItemMenu", { fg = c.white })
 
-fg("LineNr", c.grey)
-fg("NvimInternalError", c.red)
-fg("VertSplit", c.one_bg2)
+hl("LineNr", { fg = c.grey })
+hl("NvimInternalError", { fg = c.red })
+hl("VertSplit", { fg = c.one_bg2 })
 
 -- Git signs
-fg_bg("DiffAdd", c.blue, "NONE")
-fg_bg("DiffChange", c.grey_fg, "NONE")
-fg_bg("DiffChangeDelete", c.red, "NONE")
-fg_bg("DiffModified", c.red, "NONE")
-fg_bg("DiffDelete", c.red, "NONE")
+hl("DiffAdd", { fg = c.blue, bg = "NONE" })
+hl("DiffChange", { fg = c.grey_fg, bg = "NONE" })
+hl("DiffChangeDelete", { fg = c.red, bg = "NONE" })
+hl("DiffModified", { fg = c.red, bg = "NONE" })
+hl("DiffDelete", { fg = c.red, bg = "NONE" })
 
 -- Indent blankline plugin
-fg("IndentBlanklineChar", c.line)
-fg("IndentBlanklineSpaceChar", c.line)
+hl("IndentBlanklineChar", { fg = c.line })
+hl("IndentBlanklineSpaceChar", { fg = c.line })
 
 -- Lsp diagnostics
 
-fg("DiagnosticHint", c.purple)
-fg("DiagnosticError", c.red)
-fg("DiagnosticWarn", c.yellow)
-fg("DiagnosticInformation", c.green)
+hl("DiagnosticHint", { fg = c.purple })
+hl("DiagnosticError", { fg = c.red })
+hl("DiagnosticWarn", { fg = c.yellow })
+hl("DiagnosticInformation", { fg = c.green })
 
 -- NvimTree
-fg("NvimTreeEmptyFolderName", c.folder_bg)
-fg("NvimTreeEndOfBuffer", c.darker_black)
-fg("NvimTreeFolderIcon", c.folder_bg)
-fg("NvimTreeFolderName", c.folder_bg)
-fg("NvimTreeGitDirty", c.red)
-fg("NvimTreeIndentMarker", c.one_bg2)
-bg("NvimTreeNormal", c.darker_black)
-bg("NvimTreeNormalNC", c.darker_black)
-fg("NvimTreeOpenedFolderName", c.folder_bg)
-fg("NvimTreeRootFolder", c.red .. " gui=underline") -- enable underline for root folder in nvim tree
-fg_bg("NvimTreeStatuslineNc", c.darker_black, c.darker_black)
-fg_bg("NvimTreeVertSplit", c.darker_black, c.darker_black)
-fg_bg("NvimTreeWindowPicker", c.red, c.black2)
+hl("NvimTreeEmptyFolderName", { fg = c.folder_bg })
+hl("NvimTreeEndOfBuffer", { fg = c.darker_black })
+hl("NvimTreeFolderIcon", { fg = c.folder_bg })
+hl("NvimTreeFolderName", { fg = c.folder_bg })
+hl("NvimTreeGitDirty", { fg = c.red })
+hl("NvimTreeIndentMarker", { fg = c.one_bg2 })
+hl("NvimTreeNormal", { bg = c.darker_black })
+hl("NvimTreeNormalNC", { bg = c.darker_black })
+hl("NvimTreeOpenedFolderName", { fg = c.folder_bg })
+hl("NvimTreeRootFolder", { fg = c.red, underline = true }) -- enable underline for root folder in nvim tree
+hl("NvimTreeStatuslineNc", { fg = c.darker_black, bg = c.darker_black })
+hl("NvimTreeVertSplit", { fg = c.darker_black, bg = c.darker_black })
+hl("NvimTreeWindowPicker", { fg = c.red, bg = c.black2 })
 
 -- Telescope
-fg_bg("TelescopeBorder", c.darker_black, c.darker_black)
-fg_bg("TelescopePromptBorder", c.black2, c.black2)
+hl("TelescopeBorder", { fg = c.darker_black, bg = c.darker_black })
+hl("TelescopePromptBorder", { fg = c.black2, bg = c.black2 })
 
-fg_bg("TelescopePromptNormal", c.white, c.black2)
-fg_bg("TelescopePromptPrefix", c.red, c.black2)
+hl("TelescopePromptNormal", { fg = c.white, bg = c.black2 })
+hl("TelescopePromptPrefix", { fg = c.red, bg = c.black2 })
 
-bg("TelescopeNormal", c.darker_black)
+hl("TelescopeNormal", { bg = c.darker_black })
 
-fg_bg("TelescopePreviewTitle", c.black, c.green)
-fg_bg("TelescopePromptTitle", c.black, c.red)
-fg_bg("TelescopeResultsTitle", c.darker_black, c.darker_black)
+hl("TelescopePreviewTitle", { fg = c.black, bg = c.green })
+hl("TelescopePromptTitle", { fg = c.black, bg = c.red })
+hl("TelescopeResultsTitle", { fg = c.darker_black, bg = c.darker_black })
 
-bg("TelescopeSelection", c.black2)
+hl("TelescopeSelection", { bg = c.black2 })
 
-bg("NormalFloat", "NONE")
-bg("NvimTreeNormal", "NONE")
-bg("NvimTreeNormalNC", "NONE")
-bg("NvimTreeStatusLineNC", "NONE")
-fg_bg("NvimTreeVertSplit", c.grey, "NONE")
+hl("NormalFloat", { bg = "NONE" })
+hl("NvimTreeNormal", { bg = "NONE" })
+hl("NvimTreeNormalNC", { bg = "NONE" })
+hl("NvimTreeStatusLineNC", { bg = "NONE" })
+hl("NvimTreeVertSplit", { fg = c.grey, bg = "NONE" })
 
 -- telescope
-bg("TelescopeBorder", "NONE")
-bg("TelescopePrompt", "NONE")
-bg("TelescopeResults", "NONE")
-bg("TelescopePromptBorder", "NONE")
-bg("TelescopePromptNormal", "NONE")
-bg("TelescopeNormal", "NONE")
-bg("TelescopePromptPrefix", "NONE")
-fg("TelescopeBorder", c.one_bg)
-fg_bg("TelescopeResultsTitle", c.black, c.blue)
+hl("TelescopeBorder", { bg = "NONE" })
+hl("TelescopePrompt", { bg = "NONE" })
+hl("TelescopeResults", { bg = "NONE" })
+hl("TelescopePromptBorder", { bg = "NONE" })
+hl("TelescopePromptNormal", { bg = "NONE" })
+hl("TelescopeNormal", { bg = "NONE" })
+hl("TelescopePromptPrefix", { bg = "NONE" })
+hl("TelescopeBorder", { fg = c.one_bg })
+hl("TelescopeResultsTitle", { fg = c.black, bg = c.blue })
 
--- bg("Normal", "NONE")
--- bg("Folded", "NONE")
--- fg("Folded", "NONE")
--- fg("Comment", c.grey)
+hl("Normal", { bg = "NONE" })
+hl("Folded", { bg = "NONE" })
+hl("Folded", { fg = "NONE" })

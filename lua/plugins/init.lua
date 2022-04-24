@@ -16,6 +16,10 @@ return require("packer").startup(function()
     event = "VimEnter",
   })
 
+  use({ "antoinemadec/FixCursorHold.nvim" })
+
+  use("famiu/bufdelete.nvim")
+
   use({
     "NvChad/nvterm",
     config = function()
