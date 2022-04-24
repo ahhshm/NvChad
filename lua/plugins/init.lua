@@ -30,6 +30,19 @@ return require("packer").startup(function()
     end,
   })
 
+  use("MunifTanjim/nui.nvim")
+
+  use({
+    "bennypowers/nvim-regexplainer",
+    requires = {
+      "nvim-treesitter/nvim-treesitter",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("plugins.configs.others").regexplainer()
+    end,
+  })
+
   use({
     "kyazdani42/nvim-web-devicons",
     config = function()
