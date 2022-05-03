@@ -8,4 +8,23 @@
 -- Open a file from its last left off position
 -- vim.cmd [[ au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]]
 -- File extension specific tabbing
+<<<<<<< Updated upstream
 -- vim.cmd [[ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 ]]
+=======
+-- autocmd("Filetype", {
+--    pattern = "python",
+--    callback = function()
+--       vim.opt_local.expandtab = true
+--       vim.opt_local.tabstop = 4
+--       vim.opt_local.shiftwidth = 4
+--       vim.opt_local.softtabstop = 4
+--    end,
+-- })
+
+-- Highlight yanked text
+-- autocmd("TextYankPost", {
+--    callback = function()
+--       vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
+--    end,
+-- })
+>>>>>>> Stashed changes
