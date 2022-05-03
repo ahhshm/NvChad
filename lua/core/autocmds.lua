@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = group_lsp,
 })
 
--- Enable spellcheck in gitcommit files
+-- Enable spellcheck in git commit window
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.spell = true
