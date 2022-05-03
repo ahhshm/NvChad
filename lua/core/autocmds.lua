@@ -15,10 +15,6 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.spell = true
     hl("SpellCap", {})
-    hl("SpellBad", {
-      link = "Error",
-      undercurl = true,
-    })
   end,
   pattern = "gitcommit",
   group = group_git,
