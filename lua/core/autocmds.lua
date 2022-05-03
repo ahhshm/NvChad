@@ -4,7 +4,7 @@ local hl = require("core.utils").hl
 local group_lsp = vim.api.nvim_create_augroup("_lsp", { clear = true })
 local group_git = vim.api.nvim_create_augroup("_git", { clear = true })
 
--- format before save
+-- Format before save
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
     vim.lsp.buf.formatting_sync()
@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = group_lsp,
 })
 
--- enable spellcheck in gitcommit files
+-- Enable spellcheck in gitcommit files
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.spell = true
@@ -22,14 +22,14 @@ vim.api.nvim_create_autocmd("FileType", {
   group = group_git,
 })
 
--- highlight yanked text
+-- Highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
   end,
 })
 
--- don't show any numbers inside terminals
+-- Don't show any numbers inside terminals
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "term://*",
   callback = function()
