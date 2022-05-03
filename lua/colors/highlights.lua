@@ -3,7 +3,7 @@ local c = require("colors").get()
 local hl = require("core.utils").hl
 
 hl("SpellBad", {
-  link = "DiagnosticWarn",
+  link = "Error",
 })
 
 -- Comments
