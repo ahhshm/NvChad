@@ -1,8 +1,5 @@
 local fn = vim.fn
-
 local hl = require("core.utils").hl
-local match_cursorword = require("core.utils").match_cursorword
-local c = require("colors").get()
 
 local group_lsp = vim.api.nvim_create_augroup("_lsp", { clear = true })
 local group_git = vim.api.nvim_create_augroup("_git", { clear = true })
@@ -19,7 +16,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = true
     hl("SpellCap", {})
     hl("SpellBad", {
-      fg = "red",
+      link = "Error",
       undercurl = true,
     })
   end,
