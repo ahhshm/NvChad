@@ -1,36 +1,37 @@
 local fn = vim.fn
 local hl = require("core.utils").hl
+local autocmd = vim.api.nvim_create_autocmd
 
 local group_lsp = vim.api.nvim_create_augroup("_lsp", { clear = true })
-local group_git = vim.api.nvim_create_augroup("_git", { clear = true })
+local group_spellcheck = vim.api.nvim_create_augroup("_spellcheck", { clear = true })
 
 -- Format before save
-vim.api.nvim_create_autocmd("BufWritePre", {
+autocmd("BufWritePre", {
   callback = function()
     vim.lsp.buf.formatting_sync()
   end,
   group = group_lsp,
 })
 
--- Enable spellcheck in git commit window
-vim.api.nvim_create_autocmd("FileType", {
+-- Enable spellcheck in markdown and gitcommit files
+autocmd("FileType", {
   callback = function()
     vim.opt_local.spell = true
     hl("SpellCap", {})
   end,
-  pattern = "gitcommit",
-  group = group_git,
+  pattern = { "gitcommit", "markdown" },
+  group = group_spellcheck,
 })
 
 -- Highlight yanked text
-vim.api.nvim_create_autocmd("TextYankPost", {
+autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
   end,
 })
 
 -- Don't show any numbers inside terminals
-vim.api.nvim_create_autocmd("TermOpen", {
+autocmd("TermOpen", {
   pattern = "term://*",
   callback = function()
     vim.opt_local.number = false
@@ -40,16 +41,17 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 -- Open a file from its last left off position
-vim.api.nvim_create_autocmd("BufReadPost", {
+autocmd("BufReadPost", {
   callback = function()
     if not fn.expand("%:p"):match("m/.git/") and fn.line("'\"") > 1 and fn.line("'\"") <= fn.line("$") then
       vim.cmd("normal! g'\"")
+      vim.cmd("normal zz")
     end
   end,
 })
 
 -- File extension specific tabbing
-vim.api.nvim_create_autocmd("Filetype", {
+autocmd("Filetype", {
   pattern = "python",
   callback = function()
     vim.opt_local.expandtab = true
@@ -60,28 +62,34 @@ vim.api.nvim_create_autocmd("Filetype", {
 })
 
 -- uncomment this if you want to open nvim with a dir
-vim.api.nvim_create_autocmd("BufEnter", { command = [[if &buftype != "terminal" | lcd %:p:h | endif]] })
+autocmd("BufEnter", {
+  callback = function()
+    if vim.api.nvim_buf_get_option(0, "buftype") ~= "terminal" then
+      vim.cmd("lcd %:p:h")
+    end
+  end,
+})
 
 -- Use relative & absolute line numbers in 'n' & 'i' modes respectively
-vim.api.nvim_create_autocmd("InsertEnter", {
+autocmd("InsertEnter", {
   callback = function()
     vim.opt.relativenumber = false
   end,
 })
-vim.api.nvim_create_autocmd("InsertLeave", {
+autocmd("InsertLeave", {
   callback = function()
     vim.opt.relativenumber = true
   end,
 })
 
 -- -- underline the word under cursor
--- vim.api.nvim_create_autocmd("VimEnter", {
+-- autocmd("VimEnter", {
 --   callback = function()
 --     hl("CursorWord", { underline = true })
 --     match_cursorword()
 --   end,
 -- })
--- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+-- autocmd({ "CursorMoved", "CursorMovedI" }, {
 --   callback = function()
 --     match_cursorword()
 --   end,

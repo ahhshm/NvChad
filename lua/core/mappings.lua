@@ -267,9 +267,8 @@ M.lspconfig = function(bufnr)
   local buf = vim.lsp.buf
   local d = vim.diagnostic
 
-  local buf_map = function(...)
-    local key, lhs, rhs = ...
-    map(key, lhs, rhs, { buffer = bufnr })
+  local buf_map = function(mode, lhs, rhs)
+    map(mode, lhs, rhs, { buffer = bufnr })
   end
 
   buf_map("n", "<leader>e", function()

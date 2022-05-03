@@ -1,12 +1,13 @@
 local M = {}
 
 M.map = function(mode, lhs, rhs, opt)
-  local options = { noremap = true, silent = true }
+  local options = { silent = true }
   if opt then
     options = vim.tbl_extend("force", options, opt)
   end
 
   if not lhs or lhs == "" then
+    vim.notify("lhs couldn't be nil/empty string", vim.log.levels.ERROR)
     return
   end
 
