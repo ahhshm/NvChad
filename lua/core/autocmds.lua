@@ -4,6 +4,7 @@ local hl = require("core.utils").hl
 local group_lsp = vim.api.nvim_create_augroup("_lsp", { clear = true })
 local group_git = vim.api.nvim_create_augroup("_git", { clear = true })
 
+-- format before save
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
     vim.lsp.buf.formatting_sync()
@@ -11,6 +12,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = group_lsp,
 })
 
+-- enable spellcheck in gitcommit files
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.spell = true
@@ -20,23 +22,14 @@ vim.api.nvim_create_autocmd("FileType", {
   group = group_git,
 })
 
+-- highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
   end,
 })
 
-vim.api.nvim_create_autocmd("BufReadPost", {
-  pattern = "*",
-  callback = function()
-    if fn.line("'\"") > 0 and fn.line("'\"") <= fn.line("$") then
-      fn.setpos(".", fn.getpos("'\""))
-      vim.api.nvim_feedkeys("zz", "n", true)
-    end
-  end,
-})
-
--- Don't show any numbers inside terminals
+-- don't show any numbers inside terminals
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "term://*",
   callback = function()
@@ -48,7 +41,11 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 -- Open a file from its last left off position
 vim.api.nvim_create_autocmd("BufReadPost", {
-  command = [[ if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]],
+  callback = function()
+    if not fn.expand("%:p"):match("m/.git/") and fn.line("'\"") > 1 and fn.line("'\"") <= fn.line("$") then
+      vim.cmd("normal! g'\"")
+    end
+  end,
 })
 
 -- File extension specific tabbing

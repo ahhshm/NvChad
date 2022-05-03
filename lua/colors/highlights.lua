@@ -2,6 +2,10 @@ local c = require("colors").get()
 
 local hl = require("core.utils").hl
 
+hl("SpellBad", {
+  link = "DiagnosticWarn",
+})
+
 -- Comments
 hl("Comment", { fg = c.grey_fg })
 
@@ -95,9 +99,6 @@ hl("TelescopeBorder", { fg = c.one_bg })
 hl("TelescopeResultsTitle", { fg = c.black, bg = c.blue })
 
 hl("FidgetTask", { bg = "NONE" })
-hl("SpellBad", {
-  link = "DiagnosticWarn",
-})
 
 -- hl("Normal", { bg = "NONE" })
 -- hl("Folded", { bg = "NONE" })
