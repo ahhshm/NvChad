@@ -95,6 +95,9 @@ hl("TelescopeBorder", { fg = c.one_bg })
 hl("TelescopeResultsTitle", { fg = c.black, bg = c.blue })
 
 hl("FidgetTask", { bg = "NONE" })
+hl("SpellBad", {
+  link = "DiagnosticWarn",
+})
 
 -- hl("Normal", { bg = "NONE" })
 -- hl("Folded", { bg = "NONE" })
