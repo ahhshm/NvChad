@@ -1,5 +1,4 @@
 local fn = vim.fn
-local hl = require("core.utils").hl
 local autocmd = vim.api.nvim_create_autocmd
 
 local group_lsp = vim.api.nvim_create_augroup("_lsp", { clear = true })
